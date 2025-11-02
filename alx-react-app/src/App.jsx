@@ -22,7 +22,7 @@ function App() {
       <Header />
       <MainContent />
       <Footer />
-      <UserProfile name="Kate Muraya" age={30} bio="A software developer from Kenya." />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
