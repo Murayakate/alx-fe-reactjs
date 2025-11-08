@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UserContext } from './UserContext';
+import { UserContext } from './UserContext.js';
 
 function UserDetails() {
   // This is like reaching into our magical box to get the userData

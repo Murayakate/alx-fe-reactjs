@@ -1,5 +1,5 @@
 import ProfilePage from './components/ProfilePage';
-import { UserContext } from './components/UserContext';
+import { UserContext } from './components/UserContext.js';
 
 function App() {
   // This is our user data that we want to share with other components
