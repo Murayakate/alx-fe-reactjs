@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { useRecipeStore } from "../stores/userecipe";
 
-
-
-
-
-export const AddRecipeForm =()=>{
-const addRecipe=useRecipeStore(state=>state.addRecipe);
-const [title,setTitle]=useState('');
-const [description,setDescription]=useState('');
+const AddRecipeForm = () => {
+  const addRecipe = useRecipeStore(state => state.addRecipe);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
    
  const handleSubmit = (event) => {
       event.preventDefault();
@@ -35,3 +31,5 @@ const [description,setDescription]=useState('');
       </form>
     );
 };
+
+export default AddRecipeForm;
