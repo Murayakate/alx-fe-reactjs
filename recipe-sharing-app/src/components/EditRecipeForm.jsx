@@ -19,9 +19,9 @@ const EditRecipeForm = ({ recipe }) => {
   const navigate = useNavigate();
 
   // This function runs when we submit the form
-  const handleSubmit = (e) => {
+  const handleSubmit = (event) => {
     // Prevent the page from refreshing
-    e.preventDefault();
+    event.preventDefault();
 
     // Update the recipe in our store with the new information
     updateRecipe(recipe.id, {
