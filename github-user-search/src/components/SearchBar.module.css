@@ -1,0 +1,52 @@
+
+/* The container for the whole search bar */
+.wrapper {
+  background: white;
+  width: 100%;
+  max-width: 500px; /* Stops it from getting too wide */
+  margin: 0 auto 40px; /* Centers it and adds space below */
+  padding: 10px;
+  border-radius: 50px; /* Makes it fully rounded (Pill shape) */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  display: flex; /* Puts input and button in a row */
+  align-items: center;
+  transition: box-shadow 0.3s;
+}
+
+/* Glow effect when you click inside */
+.wrapper:focus-within {
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); /* Purple glow */
+}
+
+/* The text input field */
+.input {
+  flex-grow: 1; /* Takes up all available space */
+  border: none;
+  outline: none; /* Removes the default ugly blue border */
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: #4a5568;
+  font-family: 'Inter', sans-serif;
+}
+
+.input::placeholder {
+  color: #a0aec0;
+}
+
+/* The Search Button */
+
+.designBtn {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.designBtn:hover {
+  background-color: #4338ca;
+}
