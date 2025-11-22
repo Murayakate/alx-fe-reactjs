@@ -1,7 +1,10 @@
 
-import styles from './UserCard.module.css'; // Make sure this points to the file above
+import styles from './UserCard.module.css';
 
-function UserCard() {
+function UserCard({user}) {
+  if (!user) {
+    return null;
+  }
   return (
     <div className={styles.card}>
       
@@ -10,23 +13,29 @@ function UserCard() {
 
       {/* 2. The Avatar */}
       <img
-        src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+        src={user.avatar_url}
         alt="User Avatar"
         className={styles.avatar}
       />
 
       {/* 3. Name and Bio */}
       <div className={styles.content}>
-        <h2 className={styles.name}>GitHub User</h2>
+        <h2 className={styles.name}>{user.name || user.login}</h2>
         {/* 1. Make the username a link too! */}
-        <a href="https://github.com" target="_blank" rel="noreferrer" className={styles.username}>
-            @username
+        <a href={user.html_url}
+         target="_blank"
+         
+         rel="noreferrer" 
+         className={styles.username}>
+            {user.login}
         </a>
         <p className={styles.bio}>
-          Building things for the web. Learning React and loving it! 🚀
+         {user.bio || 'this user has no bio' }
+         
         </p>
-          {/*The View Profile Button */}
-        <a href="https://github.com" target="_blank" rel="noreferrer">
+        <a href={user.html_url} 
+        target="_blank"
+         rel="noreferrer">
             <button className={styles.profileBtn}>View Profile</button>
         </a>
       </div>
@@ -36,15 +45,15 @@ function UserCard() {
       {/* 4. The Stats Grid */}
       <div className={styles.stats}>
         <div className={styles.statItem}>
-          <span className={styles.statValue}>25</span>
+          <span className={styles.statValue}>{user.public_repos}</span>
           <span className={styles.statLabel}>Repos</span>
         </div>
         <div className={styles.statItem}>
-          <span className={styles.statValue}>1.2k</span>
+          <span className={styles.statValue}>{user.followers} </span>
           <span className={styles.statLabel}>Followers</span>
         </div>
         <div className={styles.statItem}>
-          <span className={styles.statValue}>300</span>
+          <span className={styles.statValue}>{user.following}</span>
           <span className={styles.statLabel}>Following</span>
         </div>
       </div>
