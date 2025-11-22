@@ -1,82 +1,156 @@
 import React, { useState } from 'react';
-import fetchUserData from '../services/githubService'; // Make sure this matches your export type
-import styles from './SearchBar.module.css';
+import fetchUserData from '../services/githubService';
+// We import the CSS file where we hid all the messy Tailwind classes
+import styles from './SearchBar.module.css'; 
 
 function Search() {
+  // ==========================================
+  // 1. THE MEMORY (STATE)
+  // ==========================================
+  
+  // Holds the text from the "Username" input box
   const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
+  
+  // Holds the text from the "Location" input box
+  const [location, setLocation] = useState('');
+  
+  // Holds the number from the "Min Repos" input box
+  const [minRepos, setMinRepos] = useState('');
+  
+  // Holds the LIST of users we get back from GitHub. 
+  // Initial value is [] (empty array) because we expect a list.
+  const [userData, setUserData] = useState([]); 
+  
+  // Controls the "Searching..." text visibility
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  
+  // Controls the Error Message visibility
+  const [error, setError] = useState(false);
 
+  // ==========================================
+  // 2. THE BRAIN (LOGIC)
+  // ==========================================
+  
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setUserData(null);
+    e.preventDefault(); // Stop the page from refreshing!
+    
+    setLoading(true);   // Turn spinner ON
+    setError(false);    // Clear old errors
+    setUserData([]);    // Clear old results
 
     try {
-      const response = await fetchUserData(username);
-      setUserData(response.data);
+      // Call the service with our 3 search criteria
+      const response = await fetchUserData({ username, location, minRepos });
+      
+      // SUCCESS: The Search API puts the list of users inside .items
+      setUserData(response.data.items); 
+      
     } catch (err) {
+      // FAILURE: If internet fails or API breaks
       setError(true);
     } finally {
+      // CLEANUP: Turn spinner OFF (runs whether success or fail)
       setLoading(false);
     }
   };
 
+  // ==========================================
+  // 3. THE BODY (UI / HTML)
+  // ==========================================
   return (
-    <div className="search-container">
+    // We use 'styles.container' instead of writing 5 tailwind classes here
+    <div className={styles.container}>
+      
+      <h1 className={styles.title}>
+        GitHub <span className="text-blue-600">Finder</span>
+      </h1>
+      
+      {/* --- FORM SECTION --- */}
+      <form onSubmit={handleSubmit} className={styles.formWrapper}>
         
-        {/* FORM */}
-        <form onSubmit={handleSubmit} className={styles.wrapper}>
+        {/* Username Input */}
+        <div>
+          <label className={styles.label}>Github Username</label>
+          <input 
+            type="text" 
+            placeholder="e.g. octocat" 
+            className={styles.inputField} 
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        {/* Location & Repos Row (Side by Side) */}
+        <div className={styles.row}>
+          <div>
+            <label className={styles.label}>Location</label>
             <input 
-                type="text" 
-                placeholder="Search GitHub username..." 
-                className={styles.input}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+              type="text" 
+              placeholder="e.g. Kenya" 
+              className={styles.inputField}
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
             />
-            <button type="submit" className={styles.searchBtn}>Search</button>
-        </form>
+          </div>
+          <div>
+            <label className={styles.label}>Minimum Repos</label>
+            <input 
+              type="number" 
+              placeholder="e.g. 10" 
+              className={styles.inputField}
+              value={minRepos}
+              onChange={(e) => setMinRepos(e.target.value)}
+            />
+          </div>
+        </div>
 
-        {/* RESULTS */}
-        {loading && <p>Loading...</p>}
-        {error && <p>Looks like we cant find the user</p>}
+        {/* The big gradient button */}
+        <button type="submit" className={styles.searchBtn}>
+          Search Profiles
+        </button>
+      </form>
 
-        {userData && (
-            // Restoring the styles here:
-            <div className={styles.card}>
-                <div className={styles.banner}></div>
-                
-                <img 
-                  src={userData.avatar_url} 
-                  alt="avatar" 
-                  className={styles.avatar} 
-                />
-                
-                <div className={styles.content}>
-                    <h2 className={styles.name}>{userData.name || userData.login}</h2>
-                    <a href={userData.html_url} target="_blank" rel="noreferrer" className={styles.username}>
-                        {userData.login}
-                    </a>
-                </div>
-                
-                <div className={styles.stats}>
-                    <div className={styles.statItem}>
-                        <span className={styles.statValue}>{userData.public_repos}</span>
-                        <span className={styles.statLabel}>Repos</span>
-                    </div>
-                    <div className={styles.statItem}>
-                        <span className={styles.statValue}>{userData.followers}</span>
-                        <span className={styles.statLabel}>Followers</span>
-                    </div>
-                    <div className={styles.statItem}>
-                        <span className={styles.statValue}>{userData.following}</span>
-                        <span className={styles.statLabel}>Following</span>
-                    </div>
-                </div>
-            </div>
-        )}
+      {/* --- RESULTS SECTION --- */}
+      
+      {/* Show Loading Text if loading is true */}
+      {loading && <p className={styles.loading}>Searching GitHub...</p>}
+
+      {/* Show Error Box if error is true */}
+      {error && (
+        <div className={styles.error}>
+          <p>Something went wrong. Please check your internet or try again.</p>
+        </div>
+      )}
+      
+      {/* THE GRID OF CARDS */}
+      <div className={styles.resultsGrid}>
+        
+        {/* We map over the list of users to create a card for each one */}
+        {userData && userData.map((user) => (
+          
+          <div key={user.id} className={styles.userCard}>
+            
+            <img 
+              src={user.avatar_url} 
+              alt="avatar" 
+              className={styles.avatar} 
+            />
+            
+            <h2 className={styles.name}>{user.login}</h2>
+            
+            <a 
+              href={user.html_url} 
+              target="_blank" 
+              rel="noreferrer" 
+              className={styles.link}
+            >
+              View Profile &rarr;
+            </a>
+          
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
