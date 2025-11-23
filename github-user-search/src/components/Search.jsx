@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import fetchUserData from '../services/githubService';
 
 function Search() {
