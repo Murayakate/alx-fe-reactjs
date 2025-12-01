@@ -1,16 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+export default {
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: false, // You can set it to 'media' or 'class' if needed
   theme: {
-    extend: {
-      colors: {
-        // Add this custom color to test the 'text-custom-color' class
-        'custom-color': '#ff7849', 
-      },
-    },
+    extend: {},
   },
   plugins: [],
-}
+};
