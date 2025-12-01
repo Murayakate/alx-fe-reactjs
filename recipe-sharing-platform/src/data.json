@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 3,
+    "title": "Caesar Salad",
+    "summary": "Fresh romaine lettuce with parmesan cheese, croutons, and classic Caesar dressing.",
+    "image": "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 4,
+    "title": "Beef Tacos",
+    "summary": "Seasoned ground beef in crispy taco shells with fresh toppings and salsa.",
+    "image": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 5,
+    "title": "Margherita Pizza",
+    "summary": "Traditional Italian pizza with tomato sauce, fresh mozzarella, and basil.",
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 6,
+    "title": "Chocolate Chip Cookies",
+    "summary": "Soft and chewy cookies loaded with chocolate chips, perfect for dessert.",
+    "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 7,
+    "title": "Greek Moussaka",
+    "summary": "Layered eggplant casserole with spiced meat sauce and creamy béchamel topping.",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop"
+  },
+  {
+    "id": 8,
+    "title": "Thai Green Curry",
+    "summary": "Aromatic coconut curry with vegetables and Thai basil, served with jasmine rice.",
+    "image": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&h=300&fit=crop"
+  }
+]
