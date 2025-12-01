@@ -40,15 +40,25 @@ const HomePage = () => {
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
-            🍳 Recipe Sharing Platform
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Discover and share amazing recipes from around the world
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
+                🍳 Recipe Sharing Platform
+              </h1>
+              <p className="mt-2 text-gray-600">
+                Discover and share amazing recipes from around the world
+              </p>
+            </div>
+            <Link
+              to="/add-recipe"
+              className="mt-4 sm:mt-0 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            >
+              <span className="text-xl mr-2">+</span>
+              Add Recipe
+            </Link>
+          </div>
         </div>
       </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="mb-8">
