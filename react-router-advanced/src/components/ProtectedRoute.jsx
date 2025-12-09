@@ -1,8 +1,18 @@
 import { Navigate } from 'react-router-dom'
 import '../styles/ProtectedRoute.css'
 
+// Custom hook for authentication
+function useAuth() {
+  return {
+    isAuthenticated: localStorage.getItem('isAuthenticated') === 'true'
+  }
+}
+
 function ProtectedRoute({ isAuthenticated, element }) {
-  if (!isAuthenticated) {
+  const { isAuthenticated: authStatus } = useAuth()
+  const finalAuth = isAuthenticated !== undefined ? isAuthenticated : authStatus
+
+  if (!finalAuth) {
     return (
       <div className="protected-route-message">
         <h2>Access Denied</h2>
