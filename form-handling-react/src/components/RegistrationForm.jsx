@@ -48,70 +48,25 @@ const RegistrationForm = () => {
       >
         {({ values, errors, touched, handleSubmit, handleChange }) => (
           <Form onSubmit={handleSubmit} className="registration-form">
-            {/* Username Field */}
             <div className="form-group">
-              <label htmlFor="username">Username *</label>
-              <Field
-                type="text"
-                id="username"
-                name="username"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                  handleChange(e);
-                }}
-                placeholder="Enter your username"
-                className="form-input"
-              />
-              {errors.username && touched.username && (
-                <span className="error-message">{errors.username}</span>
-              )}
+              <label htmlFor="username">Username</label>
+              <Field type="text" id="username" name="username" value={username} onChange={(e) => { setUsername(e.target.value); handleChange(e); }} placeholder="Enter username" className="form-input" />
+              {errors.username && touched.username && <span className="error-message">{errors.username}</span>}
             </div>
 
-            {/* Email Field */}
             <div className="form-group">
-              <label htmlFor="email">Email *</label>
-              <Field
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  handleChange(e);
-                }}
-                placeholder="Enter your email"
-                className="form-input"
-              />
-              {errors.email && touched.email && (
-                <span className="error-message">{errors.email}</span>
-              )}
+              <label htmlFor="email">Email</label>
+              <Field type="email" id="email" name="email" value={email} onChange={(e) => { setEmail(e.target.value); handleChange(e); }} placeholder="Enter email" className="form-input" />
+              {errors.email && touched.email && <span className="error-message">{errors.email}</span>}
             </div>
 
-            {/* Password Field */}
             <div className="form-group">
-              <label htmlFor="password">Password *</label>
-              <Field
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  handleChange(e);
-                }}
-                placeholder="Enter your password"
-                className="form-input"
-              />
-              {errors.password && touched.password && (
-                <span className="error-message">{errors.password}</span>
-              )}
+              <label htmlFor="password">Password</label>
+              <Field type="password" id="password" name="password" value={password} onChange={(e) => { setPassword(e.target.value); handleChange(e); }} placeholder="Enter password" className="form-input" />
+              {errors.password && touched.password && <span className="error-message">{errors.password}</span>}
             </div>
 
-            {/* Submit Button */}
-            <button type="submit" className="submit-button">
-              Register
-            </button>
+            <button type="submit" className="submit-button">Register</button>
           </Form>
         )}
       </Formik>
