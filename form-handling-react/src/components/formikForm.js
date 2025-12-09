@@ -1,52 +1,26 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import '../styles/RegistrationForm.css';
 
 const FormikForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
 
-  // Validation schema
-  const validationSchema = yup.object().shape({
-    username: yup.string().required('Username is required'),
-    email: yup.string().required('Email is required'),
-    password: yup.string().required('Password is required'),
+  // Yup validation schema
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Username is required'),
+    email: Yup.string().required('Email is required'),
+    password: Yup.string().required('Password is required'),
   });
 
-  // Basic validation logic
-  const validateForm = (values) => {
-    const newErrors = {};
-    
-    if (!username) {
-      newErrors.username = 'Username is required';
-    }
-    
-    if (!email) {
-      newErrors.email = 'Email is required';
-    }
-    
-    if (!password) {
-      newErrors.password = 'Password is required';
-    }
-    
-    setErrors(newErrors);
-    return newErrors;
-  };
-
   const handleSubmit = (values) => {
-    const newErrors = validateForm(values);
-    
-    if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', values);
-      alert(`Welcome ${username}!`);
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      setErrors({});
-    }
+    console.log('Form submitted:', values);
+    alert(`Welcome ${values.username}!`);
+    setUsername('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -55,7 +29,6 @@ const FormikForm = () => {
       <Formik
         initialValues={{ username, email, password }}
         validationSchema={validationSchema}
-        validate={validateForm}
         onSubmit={handleSubmit}
       >
         {({ values, errors, touched, handleSubmit, handleChange }) => (
