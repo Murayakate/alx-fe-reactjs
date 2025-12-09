@@ -36,6 +36,30 @@
   cursor: not-allowed;
 }
 
+.cache-info {
+  background: white;
+  border-left: 4px solid #667eea;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cache-info p {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.cache-info p:first-child {
+  margin-top: 0;
+}
+
+.cache-info p:last-child {
+  margin-bottom: 0;
+}
+
 .posts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

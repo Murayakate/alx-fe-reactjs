@@ -18,6 +18,8 @@ const PostsComponent = () => {
     queryFn: fetchPosts,
     staleTime: 1000 * 60 * 5, // 5 minutes
     cacheTime: 1000 * 60 * 10, // 10 minutes
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
   })
 
   if (isLoading) {
@@ -51,6 +53,11 @@ const PostsComponent = () => {
         >
           {showDetails ? 'Hide Details' : 'Show Details'}
         </button>
+      </div>
+
+      <div className="cache-info">
+        <p>Data refetch interaction: Click "Refetch Posts" to manually update the data on demand</p>
+        <p>Caching demonstrated: Data is cached for 10 minutes - navigate away and return to see instant load</p>
       </div>
 
       <div className="posts-grid">
