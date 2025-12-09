@@ -29,14 +29,15 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = (values) => {
-    const errors = validateForm(values);
+    const newErrors = validateForm(values);
     
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(newErrors).length === 0) {
       console.log('Form submitted:', values);
-      alert(`Welcome ${values.username}!`);
+      alert(`Welcome ${username}!`);
       setUsername('');
       setEmail('');
       setPassword('');
+      setErrors({});
     }
   };
 
