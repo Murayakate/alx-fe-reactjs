@@ -7,7 +7,7 @@ export default {
   transform: {
     '^.+\\.(jsx?)$': 'babel-jest',
   },
-  testMatch: ['<rootDir>/src/_tests_/**/*.test.{js,jsx}'],
+  testMatch: ['<rootDir>/src/**/*.test.{js,jsx}'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!src/main.jsx',
