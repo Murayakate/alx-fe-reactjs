@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 import '../styles/RegistrationForm.css';
 
 const FormikForm = () => {
@@ -7,6 +8,13 @@ const FormikForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+
+  // Validation schema
+  const validationSchema = yup.object().shape({
+    username: yup.string().required('Username is required'),
+    email: yup.string().required('Email is required'),
+    password: yup.string().required('Password is required'),
+  });
 
   // Basic validation logic
   const validateForm = (values) => {
@@ -46,6 +54,7 @@ const FormikForm = () => {
       <h2>User Registration Form</h2>
       <Formik
         initialValues={{ username, email, password }}
+        validationSchema={validationSchema}
         validate={validateForm}
         onSubmit={handleSubmit}
       >
@@ -54,19 +63,19 @@ const FormikForm = () => {
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <Field type="text" id="username" name="username" value={username} onChange={(e) => { setUsername(e.target.value); handleChange(e); }} placeholder="Enter username" className="form-input" />
-              {errors.username && touched.username && <span className="error-message">{errors.username}</span>}
+              <ErrorMessage name="username" component="span" className="error-message" />
             </div>
 
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <Field type="email" id="email" name="email" value={email} onChange={(e) => { setEmail(e.target.value); handleChange(e); }} placeholder="Enter email" className="form-input" />
-              {errors.email && touched.email && <span className="error-message">{errors.email}</span>}
+              <ErrorMessage name="email" component="span" className="error-message" />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <Field type="password" id="password" name="password" value={password} onChange={(e) => { setPassword(e.target.value); handleChange(e); }} placeholder="Enter password" className="form-input" />
-              {errors.password && touched.password && <span className="error-message">{errors.password}</span>}
+              <ErrorMessage name="password" component="span" className="error-message" />
             </div>
 
             <button type="submit" className="submit-button">Register</button>
