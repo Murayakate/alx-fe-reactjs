@@ -1,0 +1,74 @@
+.profile-details {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.profile-details h2 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.details-card {
+  background: #f9f9f9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item .label {
+  font-weight: 600;
+  color: #667eea;
+  min-width: 120px;
+}
+
+.detail-item .value {
+  color: #555;
+  text-align: right;
+}
+
+.detail-item .value.active {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.nested-route-info {
+  color: #999;
+  font-size: 13px;
+  margin-top: 20px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-item .value {
+    text-align: left;
+  }
+}
