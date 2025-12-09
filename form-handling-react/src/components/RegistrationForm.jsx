@@ -1,57 +1,40 @@
 import { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+import { Formik, Form, Field } from 'formik';
 import '../styles/RegistrationForm.css';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-
-  const [errors, setErrors] = useState({});
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // Basic validation logic
   const validateForm = (values) => {
-    const newErrors = {};
+    const errors = {};
     
     if (!values.username) {
-      newErrors.username = 'Username is required';
-    } else if (values.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
+      errors.username = 'Username is required';
     }
     
     if (!values.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      newErrors.email = 'Invalid email format';
+      errors.email = 'Email is required';
     }
     
     if (!values.password) {
-      newErrors.password = 'Password is required';
-    } else if (values.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      errors.password = 'Password is required';
     }
     
-    return newErrors;
-  };
-
-  const initialValues = {
-    username: '',
-    email: '',
-    password: '',
+    return errors;
   };
 
   const handleSubmit = (values) => {
-    const newErrors = validateForm(values);
+    const errors = validateForm(values);
     
-    if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted with values:', values);
-      alert(`Welcome ${values.username}! Your account has been created.`);
-      setFormData(initialValues);
-    } else {
-      setErrors(newErrors);
+    if (Object.keys(errors).length === 0) {
+      console.log('Form submitted:', values);
+      alert(`Welcome ${values.username}!`);
+      setUsername('');
+      setEmail('');
+      setPassword('');
     }
   };
 
@@ -59,11 +42,11 @@ const RegistrationForm = () => {
     <div className="registration-container">
       <h2>User Registration Form</h2>
       <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
+        initialValues={{ username, email, password }}
         validate={validateForm}
+        onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+        {({ values, errors, touched, handleSubmit, handleChange }) => (
           <Form onSubmit={handleSubmit} className="registration-form">
             {/* Username Field */}
             <div className="form-group">
@@ -72,32 +55,36 @@ const RegistrationForm = () => {
                 type="text"
                 id="username"
                 name="username"
-                value={values.username}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  handleChange(e);
+                }}
                 placeholder="Enter your username"
                 className="form-input"
               />
               {errors.username && touched.username && (
-                <div className="error-message">{errors.username}</div>
+                <span className="error-message">{errors.username}</span>
               )}
             </div>
 
             {/* Email Field */}
             <div className="form-group">
-              <label htmlFor="email">Email Address *</label>
+              <label htmlFor="email">Email *</label>
               <Field
                 type="email"
                 id="email"
                 name="email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  handleChange(e);
+                }}
                 placeholder="Enter your email"
                 className="form-input"
               />
               {errors.email && touched.email && (
-                <div className="error-message">{errors.email}</div>
+                <span className="error-message">{errors.email}</span>
               )}
             </div>
 
@@ -108,24 +95,22 @@ const RegistrationForm = () => {
                 type="password"
                 id="password"
                 name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  handleChange(e);
+                }}
                 placeholder="Enter your password"
                 className="form-input"
               />
               {errors.password && touched.password && (
-                <div className="error-message">{errors.password}</div>
+                <span className="error-message">{errors.password}</span>
               )}
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="submit-button"
-            >
-              {isSubmitting ? 'Registering...' : 'Register'}
+            <button type="submit" className="submit-button">
+              Register
             </button>
           </Form>
         )}
