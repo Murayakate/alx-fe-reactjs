@@ -6,24 +6,26 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
 
   // Basic validation logic
   const validateForm = (values) => {
-    const errors = {};
+    const newErrors = {};
     
-    if (!values.username) {
-      errors.username = 'Username is required';
+    if (!username) {
+      newErrors.username = 'Username is required';
     }
     
-    if (!values.email) {
-      errors.email = 'Email is required';
+    if (!email) {
+      newErrors.email = 'Email is required';
     }
     
-    if (!values.password) {
-      errors.password = 'Password is required';
+    if (!password) {
+      newErrors.password = 'Password is required';
     }
     
-    return errors;
+    setErrors(newErrors);
+    return newErrors;
   };
 
   const handleSubmit = (values) => {
