@@ -102,7 +102,6 @@ describe('TodoList Component', () => {
       const addButton = screen.getByRole('button', { name: /add todo/i })
       await user.click(addButton)
 
-      // Should still have 3 todos
       expect(screen.getByText(/total todos: 3/i)).toBeInTheDocument()
     })
 
@@ -131,11 +130,9 @@ describe('TodoList Component', () => {
       const input = screen.getByPlaceholderText(/add a new todo/i)
       const addButton = screen.getByRole('button', { name: /add todo/i })
 
-      // Trigger error
       await user.click(addButton)
       expect(screen.getByText(/please enter a todo/i)).toBeInTheDocument()
 
-      // Type to clear error
       await user.type(input, 'New todo')
       expect(screen.queryByText(/please enter a todo/i)).not.toBeInTheDocument()
     })
@@ -287,7 +284,6 @@ describe('TodoList Component', () => {
       const user = userEvent.setup()
       render(<TodoList />)
 
-      // Delete all todos
       const deleteButtons = screen.getAllByRole('button', { name: /delete/i })
       for (const button of deleteButtons) {
         await user.click(button)
@@ -295,7 +291,6 @@ describe('TodoList Component', () => {
 
       expect(screen.getByText(/no todos yet/i)).toBeInTheDocument()
 
-      // Add new todo
       const input = screen.getByPlaceholderText(/add a new todo/i)
       const addButton = screen.getByRole('button', { name: /add todo/i })
 
@@ -312,7 +307,6 @@ describe('TodoList Component', () => {
       const user = userEvent.setup()
       render(<TodoList />)
 
-      // Add a new todo
       const input = screen.getByPlaceholderText(/add a new todo/i)
       const addButton = screen.getByRole('button', { name: /add todo/i })
 
@@ -321,15 +315,12 @@ describe('TodoList Component', () => {
 
       expect(screen.getByText('Integration test todo')).toBeInTheDocument()
 
-      // Get the last checkbox (most recently added)
       const allCheckboxes = screen.getAllByRole('checkbox')
       const newCheckbox = allCheckboxes[allCheckboxes.length - 1]
 
-      // Toggle the new todo
       await user.click(newCheckbox)
       expect(newCheckbox).toBeChecked()
 
-      // Delete the todo by finding the last delete button
       const deleteButtons = screen.getAllByTestId(/^delete-button-/)
       await user.click(deleteButtons[deleteButtons.length - 1])
 
@@ -340,21 +331,18 @@ describe('TodoList Component', () => {
       const user = userEvent.setup()
       render(<TodoList />)
 
-      // Toggle first two todos
       await user.click(screen.getByTestId('todo-checkbox-1'))
       await user.click(screen.getByTestId('todo-checkbox-2'))
 
       expect(screen.getByText(/completed: 2/i)).toBeInTheDocument()
       expect(screen.getByText(/remaining: 1/i)).toBeInTheDocument()
 
-      // Add new todo
       await user.type(screen.getByPlaceholderText(/add a new todo/i), 'New task')
       await user.click(screen.getByRole('button', { name: /add todo/i }))
 
       expect(screen.getByText(/total todos: 4/i)).toBeInTheDocument()
       expect(screen.getByText(/remaining: 2/i)).toBeInTheDocument()
 
-      // Delete a completed todo
       await user.click(screen.getByTestId('delete-button-1'))
 
       expect(screen.getByText(/total todos: 3/i)).toBeInTheDocument()
